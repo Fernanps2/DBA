@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package dba_p2;
+import jade.core.Agent;
 
 /**
  *
  * @author Fernando
  */
-public class DBA_P2 {
+public class DBA_P2 extends Agent{
 
     /**
      * @param args the command line arguments
