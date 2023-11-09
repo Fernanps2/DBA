@@ -2,6 +2,8 @@ package dba_p2;
 
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
+import java.lang.Thread;
+import java.util.ArrayList;
 
 
 /*
@@ -26,19 +28,20 @@ public class MejorMovimientoBehaviour extends Behaviour {
     Entorno entorno;
     int mejorDistancia = 99999999;
     int filaMovimiento, colMovimiento;
-    Agent miAgente;
+    DBA_P2 miAgente;
     
-    public MejorMovimientoBehaviour(Entorno entornoAgente, Agent agente) {
+    public MejorMovimientoBehaviour(Entorno entornoAgente, DBA_P2 agente) {
         entorno = entornoAgente;
         miAgente = agente;
     }
     
     @Override
     public void action() {
+        mejorDistancia = 99999999;
        //Comprobamos que movimiento es mejor
        //Comprobamos movimiento norte
        if (entorno.movimientoPosible(entorno.filAgente-1,entorno.colAgente)) {
-            int distanciaNorte = CalcularDistancia(entorno.filAgente+1,entorno.colAgente);
+            int distanciaNorte = CalcularDistancia(entorno.filAgente-1,entorno.colAgente, miAgente.caminoRecorrido);
             if (distanciaNorte < mejorDistancia) {
                 mejorDistancia = distanciaNorte;
                 filaMovimiento = entorno.filAgente-1;
@@ -49,7 +52,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
        
        //Comprobamos movimiento Este
        if (entorno.movimientoPosible(entorno.filAgente,entorno.colAgente+1)) {
-            int distanciaEste = CalcularDistancia(entorno.filAgente,entorno.colAgente+1);
+            int distanciaEste = CalcularDistancia(entorno.filAgente,entorno.colAgente+1, miAgente.caminoRecorrido);
             if (distanciaEste < mejorDistancia) {
                 mejorDistancia = distanciaEste;
                 filaMovimiento = entorno.filAgente;
@@ -59,7 +62,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
        
        //Comprobamos movimiento Sur
        if (entorno.movimientoPosible(entorno.filAgente+1,entorno.colAgente)) {
-            int distanciaSur = CalcularDistancia(entorno.filAgente-1,entorno.colAgente);
+            int distanciaSur = CalcularDistancia(entorno.filAgente+1,entorno.colAgente, miAgente.caminoRecorrido);
             if (distanciaSur < mejorDistancia) {
                 mejorDistancia = distanciaSur;
                 filaMovimiento = entorno.filAgente+1;
@@ -69,7 +72,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
        
        //Comprobamos movimiento Oeste
        if (entorno.movimientoPosible(entorno.filAgente,entorno.colAgente-1)) {
-            int distanciaOeste = CalcularDistancia(entorno.filAgente,entorno.colAgente-1);
+            int distanciaOeste = CalcularDistancia(entorno.filAgente,entorno.colAgente-1, miAgente.caminoRecorrido);
             if (distanciaOeste < mejorDistancia) {
                 mejorDistancia = distanciaOeste;
                 filaMovimiento = entorno.filAgente;
@@ -77,6 +80,17 @@ public class MejorMovimientoBehaviour extends Behaviour {
             }
        }
        
+       try {
+           Thread.sleep(500);
+       } catch (InterruptedException e) {
+           System.out.print(e);
+       }
+       
+       ArrayList<Integer> posicion = new ArrayList<Integer>();
+       posicion.add(filaMovimiento);
+       posicion.add(colMovimiento);
+       
+       miAgente.caminoRecorrido.add(posicion);
        //Llamamos al comportamiento del movimiento
        miAgente.addBehaviour(new MovimientoBehaviour(entorno, filaMovimiento, colMovimiento));
        
@@ -91,10 +105,20 @@ public class MejorMovimientoBehaviour extends Behaviour {
     }
     
     
-    private int CalcularDistancia(int fila, int columna) {
+    private int CalcularDistancia(int fila, int columna, ArrayList<ArrayList<Integer>> caminoRecorrido) {
         int distancia_y = Math.abs(entorno.filMeta - fila);
         int distancia_x = Math.abs(entorno.colMeta - columna);
         
-        return (distancia_y+distancia_x);
+        ArrayList<Integer> posicion = new ArrayList<Integer>();
+        posicion.add(fila);
+        posicion.add(columna);
+        
+        int castigo = 0;
+        int indicePos = caminoRecorrido.lastIndexOf(posicion);
+        
+        if (indicePos != -1)
+            castigo = 2 - (caminoRecorrido.size() - indicePos);
+            
+        return (distancia_y + distancia_x + castigo);
     }
 }

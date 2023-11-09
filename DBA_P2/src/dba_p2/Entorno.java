@@ -50,9 +50,9 @@ public class Entorno {
     public boolean movimientoPosible(int filaMovimiento, int columnaMovimiento) {
         boolean posible = false;
         
-        if (0 > filaMovimiento || filaMovimiento > mapa.filas)
+        if (0 > filaMovimiento || filaMovimiento >= mapa.filas)
             posible = false;
-        else if (0 > columnaMovimiento || columnaMovimiento > mapa.columnas)
+        else if (0 > columnaMovimiento || columnaMovimiento >= mapa.columnas)
             posible = false;
         else if (mapa.mapa[filaMovimiento][columnaMovimiento] == 0)
             posible = true;

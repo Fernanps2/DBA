@@ -11,6 +11,7 @@ import jade.core.ProfileImpl;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,18 +25,20 @@ public class DBA_P2 extends Agent{
    
     Mapa mapa;
     Entorno entorno;
+    public ArrayList<ArrayList<Integer>> caminoRecorrido;
    
     
     protected void setup() {
         // Inicializamos el agente
         mapa = new Mapa();
-        String ruta = "../Pr1-maps/mapWithoutObstacle.txt";
+        String ruta = "../Pr1-maps/mapWithVerticalWall.txt";
+        caminoRecorrido = new ArrayList<ArrayList<Integer>>();
         
         //Leemos el mapa
         mapa.leermapa(ruta);
         
         //Inicializamos el entorno del Agente
-        entorno = new Entorno(mapa, 9, 9, 0, 0);
+        entorno = new Entorno(mapa, 9, 0, 9, 9);
         entorno.mostrarEnTorno();
         
         
