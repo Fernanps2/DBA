@@ -92,7 +92,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
        
        miAgente.caminoRecorrido.add(posicion);
        //Llamamos al comportamiento del movimiento
-       miAgente.addBehaviour(new MovimientoBehaviour(entorno, filaMovimiento, colMovimiento));
+       //miAgente.addBehaviour(new MovimientoBehaviour(entorno, filaMovimiento, colMovimiento));
        
     }
     
@@ -117,7 +117,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
         int indicePos = caminoRecorrido.lastIndexOf(posicion);
         
         if (indicePos != -1)
-            castigo = 2 - (caminoRecorrido.size() - indicePos);
+            castigo = 10 - (caminoRecorrido.size() - indicePos);
             
         return (distancia_y + distancia_x + castigo);
     }

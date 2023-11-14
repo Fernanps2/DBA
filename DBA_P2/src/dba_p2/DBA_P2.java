@@ -43,8 +43,7 @@ public class DBA_P2 extends Agent{
         
         
         addBehaviour(new MejorMovimientoBehaviour(entorno, this));
-
-        
+        addBehaviour(new MovimientoBehaviour(entorno, this));
     }
     
     

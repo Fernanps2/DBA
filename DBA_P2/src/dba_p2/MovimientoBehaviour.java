@@ -4,26 +4,28 @@
  */
 package dba_p2;
 
-import jade.core.behaviours.OneShotBehaviour;
+import jade.core.behaviours.Behaviour;
 
 /**
  *
  * @author ignaciotd
  */
-public class MovimientoBehaviour extends OneShotBehaviour {
+public class MovimientoBehaviour extends Behaviour {
     
     Entorno entorno;
     int filaMovimiento;
     int colMovimiento;
+    DBA_P2 agente;
     
-    public MovimientoBehaviour(Entorno entornoAgente, int fila, int columna) {
+    public MovimientoBehaviour(Entorno entornoAgente, DBA_P2 agente) {
         entorno = entornoAgente;
-        filaMovimiento = fila;
-        colMovimiento = columna;
-        
+        this.agente = agente;
     }
     
     public void action() {
+        filaMovimiento = (!agente.caminoRecorrido.isEmpty()) ? agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1).get(0) : -1;
+        colMovimiento = (!agente.caminoRecorrido.isEmpty()) ? agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1).get(1) : -1;
+        
         if (entorno.movimientoPosible(filaMovimiento,colMovimiento)) {
         entorno.filAgente = filaMovimiento;
         entorno.colAgente = colMovimiento;
@@ -31,5 +33,12 @@ public class MovimientoBehaviour extends OneShotBehaviour {
         
         entorno.mostrarEnTorno();
       
+    }
+    
+    public boolean done() {
+        if (entorno.filAgente == entorno.filMeta && entorno.colAgente == entorno.colMeta)
+            return true;
+        else
+            return false;
     }
 }
