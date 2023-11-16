@@ -34,10 +34,10 @@ public class Entorno {
                 
                 for (int j = 0; j < mapa.columnas; j++) {
                     if (filAgente == i && colAgente == j){
-                        System.out.print(33 + "\t");
+                        System.out.print("O\t");
                     }
                     else if (filMeta == i && colMeta == j) {
-                        System.out.print(99 + "\t");
+                        System.out.print("X\t");
                     }
                     else {
                     System.out.print(mapa.mapa[i][j] + "\t");

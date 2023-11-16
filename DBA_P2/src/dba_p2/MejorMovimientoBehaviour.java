@@ -26,7 +26,7 @@ enum Movimientos {
 
 public class MejorMovimientoBehaviour extends Behaviour {
     Entorno entorno;
-    int mejorDistancia = 99999999;
+    double mejorDistancia = 99999999;
     int filaMovimiento, colMovimiento;
     DBA_P2 miAgente;
     
@@ -41,7 +41,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
        //Comprobamos que movimiento es mejor
        //Comprobamos movimiento norte
        if (entorno.movimientoPosible(entorno.filAgente-1,entorno.colAgente)) {
-            int distanciaNorte = CalcularDistancia(entorno.filAgente-1,entorno.colAgente, miAgente.caminoRecorrido);
+            double distanciaNorte = CalcularDistancia(entorno.filAgente-1,entorno.colAgente, miAgente.caminoRecorrido);
             if (distanciaNorte < mejorDistancia) {
                 mejorDistancia = distanciaNorte;
                 filaMovimiento = entorno.filAgente-1;
@@ -52,7 +52,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
        
        //Comprobamos movimiento Este
        if (entorno.movimientoPosible(entorno.filAgente,entorno.colAgente+1)) {
-            int distanciaEste = CalcularDistancia(entorno.filAgente,entorno.colAgente+1, miAgente.caminoRecorrido);
+            double distanciaEste = CalcularDistancia(entorno.filAgente,entorno.colAgente+1, miAgente.caminoRecorrido);
             if (distanciaEste < mejorDistancia) {
                 mejorDistancia = distanciaEste;
                 filaMovimiento = entorno.filAgente;
@@ -62,7 +62,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
        
        //Comprobamos movimiento Sur
        if (entorno.movimientoPosible(entorno.filAgente+1,entorno.colAgente)) {
-            int distanciaSur = CalcularDistancia(entorno.filAgente+1,entorno.colAgente, miAgente.caminoRecorrido);
+            double distanciaSur = CalcularDistancia(entorno.filAgente+1,entorno.colAgente, miAgente.caminoRecorrido);
             if (distanciaSur < mejorDistancia) {
                 mejorDistancia = distanciaSur;
                 filaMovimiento = entorno.filAgente+1;
@@ -72,7 +72,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
        
        //Comprobamos movimiento Oeste
        if (entorno.movimientoPosible(entorno.filAgente,entorno.colAgente-1)) {
-            int distanciaOeste = CalcularDistancia(entorno.filAgente,entorno.colAgente-1, miAgente.caminoRecorrido);
+            double distanciaOeste = CalcularDistancia(entorno.filAgente,entorno.colAgente-1, miAgente.caminoRecorrido);
             if (distanciaOeste < mejorDistancia) {
                 mejorDistancia = distanciaOeste;
                 filaMovimiento = entorno.filAgente;
@@ -82,7 +82,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
        
        //Comprobamos movimiento Noreste
        if (entorno.movimientoPosibleDiagonal(entorno.filAgente-1,entorno.colAgente+1, DIRECCIONES.NORESTE)) {
-            int distanciaOeste = CalcularDistancia(entorno.filAgente-1,entorno.colAgente+1, miAgente.caminoRecorrido);
+            double distanciaOeste = CalcularDistancia(entorno.filAgente-1,entorno.colAgente+1, miAgente.caminoRecorrido);
             if (distanciaOeste < mejorDistancia) {
                 mejorDistancia = distanciaOeste;
                 filaMovimiento = entorno.filAgente-1;
@@ -92,7 +92,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
        
        //Comprobamos movimiento Noroeste
        if (entorno.movimientoPosibleDiagonal(entorno.filAgente-1,entorno.colAgente-1, DIRECCIONES.NOROESTE)) {
-            int distanciaOeste = CalcularDistancia(entorno.filAgente-1,entorno.colAgente-1, miAgente.caminoRecorrido);
+            double distanciaOeste = CalcularDistancia(entorno.filAgente-1,entorno.colAgente-1, miAgente.caminoRecorrido);
             if (distanciaOeste < mejorDistancia) {
                 mejorDistancia = distanciaOeste;
                 filaMovimiento = entorno.filAgente-1;
@@ -102,7 +102,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
        
        //Comprobamos movimiento Sureste
        if (entorno.movimientoPosibleDiagonal(entorno.filAgente+1,entorno.colAgente+1, DIRECCIONES.SURESTE)) {
-            int distanciaOeste = CalcularDistancia(entorno.filAgente+1,entorno.colAgente+1, miAgente.caminoRecorrido);
+            double distanciaOeste = CalcularDistancia(entorno.filAgente+1,entorno.colAgente+1, miAgente.caminoRecorrido);
             if (distanciaOeste < mejorDistancia) {
                 mejorDistancia = distanciaOeste;
                 filaMovimiento = entorno.filAgente+1;
@@ -112,7 +112,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
        
        //Comprobamos movimiento Suroeste
        if (entorno.movimientoPosibleDiagonal(entorno.filAgente+1,entorno.colAgente-1, DIRECCIONES.SUROESTE)) {
-            int distanciaOeste = CalcularDistancia(entorno.filAgente+1,entorno.colAgente-1, miAgente.caminoRecorrido);
+            double distanciaOeste = CalcularDistancia(entorno.filAgente+1,entorno.colAgente-1, miAgente.caminoRecorrido);
             if (distanciaOeste < mejorDistancia) {
                 mejorDistancia = distanciaOeste;
                 filaMovimiento = entorno.filAgente+1;
@@ -145,9 +145,10 @@ public class MejorMovimientoBehaviour extends Behaviour {
     }
     
     
-    private int CalcularDistancia(int fila, int columna, ArrayList<ArrayList<Integer>> caminoRecorrido) {
+    private double CalcularDistancia(int fila, int columna, ArrayList<ArrayList<Integer>> caminoRecorrido) {
         int distancia_y = Math.abs(entorno.filMeta - fila);
         int distancia_x = Math.abs(entorno.colMeta - columna);
+        double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
         
         ArrayList<Integer> posicion = new ArrayList<Integer>();
         posicion.add(fila);
@@ -159,6 +160,6 @@ public class MejorMovimientoBehaviour extends Behaviour {
         if (indicePos != -1)
             castigo = 99 - (caminoRecorrido.size() - indicePos);
             
-        return (distancia_y + distancia_x + castigo);
+        return (distancia + castigo);
     }
 }
