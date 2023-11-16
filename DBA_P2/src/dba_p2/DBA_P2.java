@@ -53,6 +53,7 @@ public class DBA_P2 extends Agent{
         String host = "localhost";
         String containerName = "container-3";
         String agentName = "ignaciotd";
+        //int port = 12344;
         
         try {
         jade.core.Runtime rt = jade.core.Runtime.instance();
@@ -62,6 +63,7 @@ public class DBA_P2 extends Agent{
         
         p.setParameter(Profile.MAIN_HOST, host);
         p.setParameter(Profile.CONTAINER_NAME, containerName);
+        //p.setParameter(Profile.MAIN_PORT, String.valueOf(port));
         
         ContainerController cc = rt.createAgentContainer(p);
         
