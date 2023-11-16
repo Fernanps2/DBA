@@ -31,14 +31,14 @@ public class DBA_P2 extends Agent{
     protected void setup() {
         // Inicializamos el agente
         mapa = new Mapa();
-        String ruta = "../Pr1-maps/mapWithVerticalWall.txt";
+        String ruta = "../Pr1-maps/mapWithDiagonalWall.txt";
         caminoRecorrido = new ArrayList<ArrayList<Integer>>();
         
         //Leemos el mapa
         mapa.leermapa(ruta);
         
         //Inicializamos el entorno del Agente
-        entorno = new Entorno(mapa, 9, 0, 9, 9);
+        entorno = new Entorno(mapa, 5, 8, 1, 9);
         entorno.mostrarEnTorno();
         
         

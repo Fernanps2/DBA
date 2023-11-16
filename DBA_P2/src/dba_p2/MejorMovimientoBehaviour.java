@@ -80,6 +80,46 @@ public class MejorMovimientoBehaviour extends Behaviour {
             }
        }
        
+       //Comprobamos movimiento Noreste
+       if (entorno.movimientoPosibleDiagonal(entorno.filAgente-1,entorno.colAgente+1, DIRECCIONES.NORESTE)) {
+            int distanciaOeste = CalcularDistancia(entorno.filAgente-1,entorno.colAgente+1, miAgente.caminoRecorrido);
+            if (distanciaOeste < mejorDistancia) {
+                mejorDistancia = distanciaOeste;
+                filaMovimiento = entorno.filAgente-1;
+                colMovimiento = entorno.colAgente+1;
+            }
+       }
+       
+       //Comprobamos movimiento Noroeste
+       if (entorno.movimientoPosibleDiagonal(entorno.filAgente-1,entorno.colAgente-1, DIRECCIONES.NOROESTE)) {
+            int distanciaOeste = CalcularDistancia(entorno.filAgente-1,entorno.colAgente-1, miAgente.caminoRecorrido);
+            if (distanciaOeste < mejorDistancia) {
+                mejorDistancia = distanciaOeste;
+                filaMovimiento = entorno.filAgente-1;
+                colMovimiento = entorno.colAgente-1;
+            }
+       }
+       
+       //Comprobamos movimiento Sureste
+       if (entorno.movimientoPosibleDiagonal(entorno.filAgente+1,entorno.colAgente+1, DIRECCIONES.SURESTE)) {
+            int distanciaOeste = CalcularDistancia(entorno.filAgente+1,entorno.colAgente+1, miAgente.caminoRecorrido);
+            if (distanciaOeste < mejorDistancia) {
+                mejorDistancia = distanciaOeste;
+                filaMovimiento = entorno.filAgente+1;
+                colMovimiento = entorno.colAgente+1;
+            }
+       }
+       
+       //Comprobamos movimiento Suroeste
+       if (entorno.movimientoPosibleDiagonal(entorno.filAgente+1,entorno.colAgente-1, DIRECCIONES.SUROESTE)) {
+            int distanciaOeste = CalcularDistancia(entorno.filAgente+1,entorno.colAgente-1, miAgente.caminoRecorrido);
+            if (distanciaOeste < mejorDistancia) {
+                mejorDistancia = distanciaOeste;
+                filaMovimiento = entorno.filAgente+1;
+                colMovimiento = entorno.colAgente-1;
+            }
+       }
+       
        try {
            Thread.sleep(500);
        } catch (InterruptedException e) {
@@ -117,7 +157,7 @@ public class MejorMovimientoBehaviour extends Behaviour {
         int indicePos = caminoRecorrido.lastIndexOf(posicion);
         
         if (indicePos != -1)
-            castigo = 10 - (caminoRecorrido.size() - indicePos);
+            castigo = 99 - (caminoRecorrido.size() - indicePos);
             
         return (distancia_y + distancia_x + castigo);
     }

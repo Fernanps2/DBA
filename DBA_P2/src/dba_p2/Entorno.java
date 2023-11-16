@@ -61,4 +61,29 @@ public class Entorno {
     
     }
     
+    public boolean movimientoPosibleDiagonal(int filaMovimiento, int columnaMovimiento, DIRECCIONES direccion) {
+        //Comprobamos que la casilla a la que se mueve es una casilla válida
+        boolean posible = movimientoPosible(filaMovimiento, columnaMovimiento);
+        
+        //Como es un movimiento en diagonal hay que hacer más comprobaciones
+        if (posible) {
+            switch (direccion) {
+                case NORESTE:
+                    posible = (mapa.mapa[filAgente-1][colAgente] == 0 && mapa.mapa[filAgente][colAgente+1] == 0);
+                    break;
+                case NOROESTE:
+                    posible = (mapa.mapa[filAgente-1][colAgente] == 0 && mapa.mapa[filAgente][colAgente-1] == 0);
+                    break;
+                case SURESTE:
+                    posible = (mapa.mapa[filAgente+1][colAgente] == 0 && mapa.mapa[filAgente][colAgente+1] == 0);
+                    break;
+                case SUROESTE:
+                    posible = (mapa.mapa[filAgente+1][colAgente] == 0 && mapa.mapa[filAgente][colAgente-1] == 0);
+                    break;
+            }
+        }
+        
+        return posible;
+    }
+    
 }
