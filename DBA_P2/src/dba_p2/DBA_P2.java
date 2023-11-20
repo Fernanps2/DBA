@@ -38,7 +38,7 @@ public class DBA_P2 extends Agent{
         mapa.leermapa(ruta);
         
         //Inicializamos el entorno del Agente
-        entorno = new Entorno(mapa, 6, 6, 6, 2);
+        entorno = new Entorno(mapa, 5, 6, 6, 2);
         entorno.mostrarEnTorno();
         
         

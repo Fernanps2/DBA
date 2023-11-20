@@ -34,7 +34,7 @@ public class Entorno {
                 
                 for (int j = 0; j < mapa.columnas; j++) {
                     if (filAgente == i && colAgente == j){
-                        System.out.print("O\t");
+                        System.out.print("I\t");
                     }
                     else if (filMeta == i && colMeta == j) {
                         System.out.print("X\t");
