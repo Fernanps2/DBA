@@ -40,7 +40,7 @@ public class Entorno {
                         System.out.print("X\t");
                     }
                     else {
-                    System.out.print(mapa.mapa[i][j] + "\t");
+                        System.out.print(mapa.mapa[i][j] + "\t");
                     }
                 }
                 System.out.println();

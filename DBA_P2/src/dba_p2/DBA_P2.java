@@ -71,7 +71,7 @@ public class DBA_P2 extends Agent{
         AgentController ac = cc.createNewAgent(agentName,
                 DBA_P2.class.getCanonicalName(), null);
         
-        ac.start();
+        ac.start();        
         } catch (StaleProxyException e) {
             e.printStackTrace();
         }

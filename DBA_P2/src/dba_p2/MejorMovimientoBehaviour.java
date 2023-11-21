@@ -24,11 +24,20 @@ enum Movimientos {
 }
 */
 
-public class MejorMovimientoBehaviour extends Behaviour {
+public class MejorMovimientoBehaviour extends Behaviour{
     Entorno entorno;
     double mejorDistancia = 99999999;
     int filaMovimiento, colMovimiento;
     DBA_P2 miAgente;
+    
+    MovimientoNorte movNorte = new MovimientoNorte();
+    MovimientoSur movSur = new MovimientoSur();
+    MovimientoEste movEste = new MovimientoEste();
+    MovimientoOeste movOeste = new MovimientoOeste();
+    MovimientoNoreste movNoreste = new MovimientoNoreste();
+    MovimientoNoroeste movNoroeste = new MovimientoNoroeste();
+    MovimientoSureste movSureste = new MovimientoSureste();
+    MovimientoSuroeste movSuroeste = new MovimientoSuroeste();
     
     public MejorMovimientoBehaviour(Entorno entornoAgente, DBA_P2 agente) {
         entorno = entornoAgente;
@@ -39,82 +48,82 @@ public class MejorMovimientoBehaviour extends Behaviour {
     public void action() {
         mejorDistancia = 99999999;
        //Comprobamos que movimiento es mejor
+       
        //Comprobamos movimiento norte
-       if (entorno.movimientoPosible(entorno.filAgente-1,entorno.colAgente)) {
-            double distanciaNorte = CalcularDistancia(entorno.filAgente-1,entorno.colAgente, miAgente.caminoRecorrido);
-            if (distanciaNorte < mejorDistancia) {
-                mejorDistancia = distanciaNorte;
+       double norte = movNorte.calculaMovimiento(entorno, miAgente);
+       if (norte != -1) {            
+            if (norte < mejorDistancia) {
+                mejorDistancia = norte;
                 filaMovimiento = entorno.filAgente-1;
                 colMovimiento = entorno.colAgente;
-            }
-            
+            }            
        }
        
        //Comprobamos movimiento Este
-       if (entorno.movimientoPosible(entorno.filAgente,entorno.colAgente+1)) {
-            double distanciaEste = CalcularDistancia(entorno.filAgente,entorno.colAgente+1, miAgente.caminoRecorrido);
-            if (distanciaEste < mejorDistancia) {
-                mejorDistancia = distanciaEste;
+       double este = movEste.calculaMovimiento(entorno, miAgente);
+       if(este != -1){
+            if (este < mejorDistancia) {
+                mejorDistancia = este;
                 filaMovimiento = entorno.filAgente;
                 colMovimiento = entorno.colAgente+1;
             }
         }
        
        //Comprobamos movimiento Sur
-       if (entorno.movimientoPosible(entorno.filAgente+1,entorno.colAgente)) {
-            double distanciaSur = CalcularDistancia(entorno.filAgente+1,entorno.colAgente, miAgente.caminoRecorrido);
-            if (distanciaSur < mejorDistancia) {
-                mejorDistancia = distanciaSur;
+       double sur = movSur.calculaMovimiento(entorno, miAgente);
+       if (sur != -1) {            
+            if (sur < mejorDistancia) {
+                mejorDistancia = sur;
                 filaMovimiento = entorno.filAgente+1;
                 colMovimiento = entorno.colAgente;
-            }
+            }            
        }
        
        //Comprobamos movimiento Oeste
-       if (entorno.movimientoPosible(entorno.filAgente,entorno.colAgente-1)) {
-            double distanciaOeste = CalcularDistancia(entorno.filAgente,entorno.colAgente-1, miAgente.caminoRecorrido);
-            if (distanciaOeste < mejorDistancia) {
-                mejorDistancia = distanciaOeste;
+       double oeste = movOeste.calculaMovimiento(entorno, miAgente);
+       if(oeste != -1){
+            if (oeste < mejorDistancia) {
+                mejorDistancia = oeste;
                 filaMovimiento = entorno.filAgente;
                 colMovimiento = entorno.colAgente-1;
             }
        }
        
        //Comprobamos movimiento Noreste
-       if (entorno.movimientoPosibleDiagonal(entorno.filAgente-1,entorno.colAgente+1, DIRECCIONES.NORESTE)) {
-            double distanciaOeste = CalcularDistancia(entorno.filAgente-1,entorno.colAgente+1, miAgente.caminoRecorrido);
-            if (distanciaOeste < mejorDistancia) {
-                mejorDistancia = distanciaOeste;
+       double norEste = movNoreste.calculaMovimiento(entorno, miAgente);
+       if(norEste != -1){
+            if (norEste < mejorDistancia) {
+                mejorDistancia = norEste;
                 filaMovimiento = entorno.filAgente-1;
                 colMovimiento = entorno.colAgente+1;
             }
        }
        
        //Comprobamos movimiento Noroeste
-       if (entorno.movimientoPosibleDiagonal(entorno.filAgente-1,entorno.colAgente-1, DIRECCIONES.NOROESTE)) {
-            double distanciaOeste = CalcularDistancia(entorno.filAgente-1,entorno.colAgente-1, miAgente.caminoRecorrido);
-            if (distanciaOeste < mejorDistancia) {
-                mejorDistancia = distanciaOeste;
+       double norOeste = movNoroeste.calculaMovimiento(entorno, miAgente);
+       if(norOeste != -1){
+            if (norOeste < mejorDistancia) {
+                mejorDistancia = norOeste;
                 filaMovimiento = entorno.filAgente-1;
                 colMovimiento = entorno.colAgente-1;
             }
        }
        
        //Comprobamos movimiento Sureste
-       if (entorno.movimientoPosibleDiagonal(entorno.filAgente+1,entorno.colAgente+1, DIRECCIONES.SURESTE)) {
-            double distanciaOeste = CalcularDistancia(entorno.filAgente+1,entorno.colAgente+1, miAgente.caminoRecorrido);
-            if (distanciaOeste < mejorDistancia) {
-                mejorDistancia = distanciaOeste;
+       double surEste = movSureste.calculaMovimiento(entorno, miAgente);
+       if(surEste != -1){
+            if (surEste < mejorDistancia) {
+                mejorDistancia = surEste;
                 filaMovimiento = entorno.filAgente+1;
                 colMovimiento = entorno.colAgente+1;
             }
        }
        
        //Comprobamos movimiento Suroeste
-       if (entorno.movimientoPosibleDiagonal(entorno.filAgente+1,entorno.colAgente-1, DIRECCIONES.SUROESTE)) {
-            double distanciaOeste = CalcularDistancia(entorno.filAgente+1,entorno.colAgente-1, miAgente.caminoRecorrido);
-            if (distanciaOeste < mejorDistancia) {
-                mejorDistancia = distanciaOeste;
+       double surOeste = movSuroeste.calculaMovimiento(entorno, miAgente);
+       if(surOeste != -1){
+            if (surOeste < mejorDistancia) {
+                mejorDistancia = surOeste;
                 filaMovimiento = entorno.filAgente+1;
                 colMovimiento = entorno.colAgente-1;
             }
