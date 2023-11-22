@@ -15,15 +15,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-
 public class Mapa {
     
     int filas;
     int columnas;
     int[][] mapa;
     
-    public Mapa()
-    {
+    public Mapa(){
         filas = 0;
         columnas = 0;
     }
@@ -54,10 +52,5 @@ public class Mapa {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    
-    
-    
-    
-    
     }
 }

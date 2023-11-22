@@ -13,8 +13,7 @@ public class Entorno {
     
     Mapa mapa;
     int filAgente, colAgente;
-    int filMeta, colMeta;
-    
+    int filMeta, colMeta;    
     
     public Entorno(Mapa mapaEntorno, int filaAgente, int columnaAgente,
                     int filaMeta, int columnaMeta) {
@@ -28,23 +27,23 @@ public class Entorno {
     
     public void mostrarEnTorno() {
         // Imprimir la matriz
-            System.out.println("Numero filas: " + mapa.filas);
-            System.out.println("Numero columnas: " + mapa.columnas);
-            for (int i = 0; i < mapa.filas; i++) {
-                
-                for (int j = 0; j < mapa.columnas; j++) {
-                    if (filAgente == i && colAgente == j){
-                        System.out.print("33\t");
-                    }
-                    else if (filMeta == i && colMeta == j) {
-                        System.out.print("X\t");
-                    }
-                    else {
-                        System.out.print(mapa.mapa[i][j] + "\t");
-                    }
+        System.out.println("Numero filas: " + mapa.filas);
+        System.out.println("Numero columnas: " + mapa.columnas);
+        for (int i = 0; i < mapa.filas; i++) {
+
+            for (int j = 0; j < mapa.columnas; j++) {
+                if (filAgente == i && colAgente == j){
+                    System.out.print("33\t");
                 }
-                System.out.println();
+                else if (filMeta == i && colMeta == j) {
+                    System.out.print("X\t");
+                }
+                else {
+                    System.out.print(mapa.mapa[i][j] + "\t");
+                }
             }
+            System.out.println();
+        }
     }
     
     public boolean movimientoPosible(int filaMovimiento, int columnaMovimiento) {
@@ -57,8 +56,7 @@ public class Entorno {
         else if (mapa.mapa[filaMovimiento][columnaMovimiento] == 0)
             posible = true;
         
-        return posible;
-    
+        return posible;    
     }
     
     public boolean movimientoPosibleDiagonal(int filaMovimiento, int columnaMovimiento, DIRECCIONES direccion) {
@@ -84,6 +82,5 @@ public class Entorno {
         }
         
         return posible;
-    }
-    
+    }    
 }

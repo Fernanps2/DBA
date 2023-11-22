@@ -31,8 +31,7 @@ public class MovimientoBehaviour extends Behaviour {
         entorno.colAgente = colMovimiento;
         }
         
-        entorno.mostrarEnTorno();
-      
+        entorno.mostrarEnTorno();      
     }
     
     public boolean done() {

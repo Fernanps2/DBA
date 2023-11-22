@@ -10,13 +10,31 @@ package dba_p2;
  */
 public class MovimientoOeste implements Movimiento{
     
+    private Entorno entorno;
+    private DBA_P2 agente;
+    
+    public MovimientoOeste (Entorno entorno, DBA_P2 agente){
+        this.entorno = entorno;
+        this.agente = agente;
+    }
+    
     @Override
-    public double calculaMovimiento(Entorno entorno, DBA_P2 miAgente){
+    public double calculaMovimiento(){
         double distanciaOeste = -1;
         
         if (entorno.movimientoPosible(entorno.filAgente,entorno.colAgente-1)) 
-            distanciaOeste = CalcularDistancia(entorno, entorno.filAgente,entorno.colAgente-1, miAgente.caminoRecorrido);
+            distanciaOeste = CalcularDistancia(entorno, entorno.filAgente,entorno.colAgente-1, agente.caminoRecorrido);
         
         return distanciaOeste;
+    }
+    
+    @Override
+    public int getFila(){
+        return entorno.filAgente;
+    }
+    
+    @Override
+    public int getColumna(){
+        return entorno.colAgente-1;
     }
 }

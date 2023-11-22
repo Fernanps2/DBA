@@ -12,7 +12,11 @@ import java.util.ArrayList;
  */
 public interface Movimiento {
     
-    public double calculaMovimiento(Entorno entorno, DBA_P2 miAgente);
+    public double calculaMovimiento();
+    
+    public int getFila();
+    
+    public int getColumna();
     
     default double CalcularDistancia(Entorno entorno, int fila, int columna, ArrayList<ArrayList<Integer>> caminoRecorrido) {
         int distancia_y = Math.abs(entorno.filMeta - fila);
