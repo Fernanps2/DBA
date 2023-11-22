@@ -31,7 +31,7 @@ public class DBA_P2 extends Agent{
     protected void setup() {
         // Inicializamos el agente
         mapa = new Mapa();
-        String ruta = "../Pr1-maps/mapWithDiagonalWall.txt";
+        String ruta = "./Pr1-maps/mapWithDiagonalWall.txt";
         caminoRecorrido = new ArrayList<ArrayList<Integer>>();
         
         //Leemos el mapa
