@@ -46,6 +46,9 @@ public class DBA_P2 extends Agent{
         addBehaviour(new MovimientoBehaviour(entorno, this));
     }
     
+    public void takeDown() {
+        System.out.println("El agente ha resuelto el mapa en " + caminoRecorrido.size() + " pasos");
+    }
     
     public static void main(String[] args){
         

@@ -35,8 +35,10 @@ public class MovimientoBehaviour extends Behaviour {
     }
     
     public boolean done() {
-        if (entorno.filAgente == entorno.filMeta && entorno.colAgente == entorno.colMeta)
+        if (entorno.filAgente == entorno.filMeta && entorno.colAgente == entorno.colMeta) {
+            agente.doDelete();
             return true;
+        }
         else
             return false;
     }
