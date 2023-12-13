@@ -11,5 +11,5 @@ import jade.core.Agent;
  * @author ignaciotd
  */
 public class Santa extends Agent {
-    
+    static private String CODIGOSECRETO = "EsUnNIñoBueno:)";
 }

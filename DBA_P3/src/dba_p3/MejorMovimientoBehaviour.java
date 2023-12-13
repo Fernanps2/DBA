@@ -22,27 +22,21 @@ public class MejorMovimientoBehaviour extends Behaviour{
     int filaMovimiento, colMovimiento;
     AgenteP3 miAgente;
     
-    MovimientoNorte movNorte;
-    MovimientoSur movSur;
-    MovimientoEste movEste;
-    MovimientoOeste movOeste;
-    MovimientoNoreste movNoreste;
-    MovimientoNoroeste movNoroeste;
-    MovimientoSureste movSureste;
-    MovimientoSuroeste movSuroeste;
+    ArrayList<Movimiento> movimientos;
     
     public MejorMovimientoBehaviour(Entorno entornoAgente, AgenteP3 agente) {
         entorno = entornoAgente;
         miAgente = agente;
+        movimientos = new ArrayList<Movimiento>();
         
-        movNorte = new MovimientoNorte(entornoAgente, agente);
-        movSur = new MovimientoSur(entornoAgente, agente);
-        movEste = new MovimientoEste(entornoAgente, agente);
-        movOeste = new MovimientoOeste(entornoAgente, agente);
-        movNoreste = new MovimientoNoreste(entornoAgente, agente);
-        movNoroeste = new MovimientoNoroeste(entornoAgente, agente);
-        movSureste = new MovimientoSureste(entornoAgente, agente);
-        movSuroeste = new MovimientoSuroeste(entornoAgente, agente);
+        movimientos.add(new MovimientoNorte(entornoAgente, agente));
+        movimientos.add(new MovimientoSur(entornoAgente, agente));
+        movimientos.add(new MovimientoEste(entornoAgente, agente));
+        movimientos.add(new MovimientoOeste(entornoAgente, agente));
+        movimientos.add(new MovimientoNoreste(entornoAgente, agente));
+        movimientos.add(new MovimientoNoroeste(entornoAgente, agente));
+        movimientos.add(new MovimientoSureste(entornoAgente, agente));
+        movimientos.add(new MovimientoSuroeste(entornoAgente, agente));
     }
     
     @Override
@@ -50,84 +44,15 @@ public class MejorMovimientoBehaviour extends Behaviour{
         mejorDistancia = 99999999;
        //Comprobamos que movimiento es mejor
        
-       //Comprobamos movimiento norte
-       double norte = movNorte.calculaMovimiento();
-       if (norte != -1) {            
-            if (norte < mejorDistancia) {
-                mejorDistancia = norte;
-                filaMovimiento = movNorte.getFila();
-                colMovimiento = movNorte.getColumna();
-            }            
-       }
-       
-       //Comprobamos movimiento Este
-       double este = movEste.calculaMovimiento();
-       if(este != -1){
-            if (este < mejorDistancia) {
-                mejorDistancia = este;
-                filaMovimiento = movEste.getFila();
-                colMovimiento = movEste.getColumna();
-            }
-        }
-       
-       //Comprobamos movimiento Sur
-       double sur = movSur.calculaMovimiento();
-       if (sur != -1) {            
-            if (sur < mejorDistancia) {
-                mejorDistancia = sur;
-                filaMovimiento = movSur.getFila();
-                colMovimiento = movSur.getColumna();
-            }            
-       }
-       
-       //Comprobamos movimiento Oeste
-       double oeste = movOeste.calculaMovimiento();
-       if(oeste != -1){
-            if (oeste < mejorDistancia) {
-                mejorDistancia = oeste;
-                filaMovimiento = movOeste.getFila();
-                colMovimiento = movOeste.getColumna();
-            }
-       }
-       
-       //Comprobamos movimiento Noreste
-       double norEste = movNoreste.calculaMovimiento();
-       if(norEste != -1){
-            if (norEste < mejorDistancia) {
-                mejorDistancia = norEste;
-                filaMovimiento = movNoreste.getFila();
-                colMovimiento = movNoreste.getColumna();
-            }
-       }
-       
-       //Comprobamos movimiento Noroeste
-       double norOeste = movNoroeste.calculaMovimiento();
-       if(norOeste != -1){
-            if (norOeste < mejorDistancia) {
-                mejorDistancia = norOeste;
-                filaMovimiento = movNoroeste.getFila();
-                colMovimiento = movNoroeste.getColumna();
-            }
-       }
-       
-       //Comprobamos movimiento Sureste
-       double surEste = movSureste.calculaMovimiento();
-       if(surEste != -1){
-            if (surEste < mejorDistancia) {
-                mejorDistancia = surEste;
-                filaMovimiento = movSureste.getFila();
-                colMovimiento = movSureste.getColumna();
-            }
-       }
-       
-       //Comprobamos movimiento Suroeste
-       double surOeste = movSuroeste.calculaMovimiento();
-       if(surOeste != -1){
-            if (surOeste < mejorDistancia) {
-                mejorDistancia = surOeste;
-                filaMovimiento = movSuroeste.getFila();
-                colMovimiento = movSuroeste.getColumna();
-            }
+       for (int i = 0; i < movimientos.size(); i++) {
+           double distancia = movimientos.get(i).calculaMovimiento();
+           if (distancia != -1) {
+               if (distancia < mejorDistancia) {
+                   mejorDistancia = distancia;
+                   filaMovimiento = movimientos.get(i).getFila();
+                   colMovimiento = movimientos.get(i).getColumna();
+               }
+           }
        }
        
        try {
