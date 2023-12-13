@@ -17,10 +17,10 @@ import java.util.ArrayList;
  */
 
 public class MejorMovimientoBehaviour extends Behaviour{
-    Entorno entorno;
-    double mejorDistancia = 99999999;
-    int filaMovimiento, colMovimiento;
-    AgenteP3 miAgente;
+    private Entorno entorno;
+    private double mejorDistancia = 99999999;
+    private int filaMovimiento, colMovimiento;
+    private AgenteP3 miAgente;
     
     ArrayList<Movimiento> movimientos;
     
@@ -65,12 +65,12 @@ public class MejorMovimientoBehaviour extends Behaviour{
        posicion.add(filaMovimiento);
        posicion.add(colMovimiento);
        
-       miAgente.caminoRecorrido.add(posicion);       
+       miAgente.getCaminoRecorrido().add(posicion);       
     }
     
     @Override
     public boolean done() {
-        if (entorno.filAgente == entorno.filMeta && entorno.colAgente == entorno.colMeta)
+        if (entorno.getFilaAgente() == entorno.getFilaMeta() && entorno.getColumnaAgente() == entorno.getColumnaMeta())
             return true;
         else
             return false;

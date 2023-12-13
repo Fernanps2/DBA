@@ -22,19 +22,19 @@ public class MovimientoSuroeste implements Movimiento{
     public double calculaMovimiento(){
         double distanciaSuroeste = -1;
         
-        if (entorno.movimientoPosibleDiagonal(entorno.filAgente+1,entorno.colAgente-1, DIRECCIONES.SUROESTE)) 
-            distanciaSuroeste = CalcularDistancia(entorno, entorno.filAgente+1,entorno.colAgente-1, agente.caminoRecorrido);
+        if (entorno.movimientoPosibleDiagonal(entorno.getFilaAgente()+1,entorno.getColumnaAgente()-1, DIRECCIONES.SUROESTE)) 
+            distanciaSuroeste = CalcularDistancia(entorno, entorno.getFilaAgente()+1,entorno.getColumnaAgente()-1, agente.getCaminoRecorrido());
         
         return distanciaSuroeste;
     }
     
     @Override
     public int getFila(){
-        return entorno.filAgente+1;
+        return entorno.getFilaAgente()+1;
     }
     
     @Override
     public int getColumna(){
-        return entorno.colAgente-1;
+        return entorno.getColumnaAgente()-1;
     }
 }

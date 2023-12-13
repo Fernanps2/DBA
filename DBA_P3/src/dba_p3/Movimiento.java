@@ -19,8 +19,8 @@ public interface Movimiento {
     public int getColumna();
     
     default double CalcularDistancia(Entorno entorno, int fila, int columna, ArrayList<ArrayList<Integer>> caminoRecorrido) {
-        int distancia_y = Math.abs(entorno.filMeta - fila);
-        int distancia_x = Math.abs(entorno.colMeta - columna);
+        int distancia_y = Math.abs(entorno.getFilaMeta() - fila);
+        int distancia_x = Math.abs(entorno.getColumnaMeta() - columna);
         double distancia = Math.sqrt(distancia_y*distancia_y + distancia_x*distancia_x);
         
         ArrayList<Integer> posicion = new ArrayList<Integer>();

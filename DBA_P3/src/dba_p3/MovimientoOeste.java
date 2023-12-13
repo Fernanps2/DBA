@@ -22,19 +22,19 @@ public class MovimientoOeste implements Movimiento{
     public double calculaMovimiento(){
         double distanciaOeste = -1;
         
-        if (entorno.movimientoPosible(entorno.filAgente,entorno.colAgente-1)) 
-            distanciaOeste = CalcularDistancia(entorno, entorno.filAgente,entorno.colAgente-1, agente.caminoRecorrido);
+        if (entorno.movimientoPosible(entorno.getFilaAgente(),entorno.getColumnaAgente()-1)) 
+            distanciaOeste = CalcularDistancia(entorno, entorno.getFilaAgente(),entorno.getColumnaAgente()-1, agente.getCaminoRecorrido());
         
         return distanciaOeste;
     }
     
     @Override
     public int getFila(){
-        return entorno.filAgente;
+        return entorno.getFilaAgente();
     }
     
     @Override
     public int getColumna(){
-        return entorno.colAgente-1;
+        return entorno.getColumnaAgente()-1;
     }
 }

@@ -11,9 +11,9 @@ package dba_p3;
  */
 public class Entorno {
     
-    Mapa mapa;
-    int filAgente, colAgente;
-    int filMeta, colMeta;    
+    private Mapa mapa;
+    private int filAgente, colAgente;
+    private int filMeta, colMeta;    
     
     public Entorno(Mapa mapaEntorno, int filaAgente, int columnaAgente,
                     int filaMeta, int columnaMeta) {
@@ -25,13 +25,55 @@ public class Entorno {
         colMeta = columnaMeta;
     }
     
+    public int getFilaAgente(){
+        return filAgente;
+    }
+    
+    public int getFilaMeta(){
+        return filMeta;
+    }
+    
+    public int getColumnaAgente(){
+        return colAgente;
+    }
+    
+    public int getColumnaMeta(){
+        return colMeta;
+    }
+    
+    public void setFilaAgente(int fila){
+        filAgente = fila;
+    }
+    
+    public void setColumnaAgente(int col){
+        colAgente = col;
+    }
+    
+    public void setFilaMeta(int fil){
+        filMeta = fil;
+    }
+    
+    public void setColumnaMeta(int col){
+        colMeta = col;
+    }
+    
+    public void modificarPosAgente(int fila, int columna){
+        setFilaAgente(fila);
+        setColumnaAgente(columna);
+    }
+    
+    public void modificarPosMeta(int fila, int columna){
+        setFilaMeta(fila);
+        setColumnaMeta(columna);
+    }
+    
     public void mostrarEnTorno() {
         // Imprimir la matriz
-        System.out.println("Numero filas: " + mapa.filas);
-        System.out.println("Numero columnas: " + mapa.columnas);
-        for (int i = 0; i < mapa.filas; i++) {
+        System.out.println("Numero filas: " + mapa.getFilas());
+        System.out.println("Numero columnas: " + mapa.getColumnas());
+        for (int i = 0; i < mapa.getFilas(); i++) {
 
-            for (int j = 0; j < mapa.columnas; j++) {
+            for (int j = 0; j < mapa.getColumnas(); j++) {
                 if (filAgente == i && colAgente == j){
                     System.out.print("33\t");
                 }
@@ -39,7 +81,7 @@ public class Entorno {
                     System.out.print("X\t");
                 }
                 else {
-                    System.out.print(mapa.mapa[i][j] + "\t");
+                    System.out.print(mapa.getMapa()[i][j] + "\t");
                 }
             }
             System.out.println();
@@ -49,11 +91,11 @@ public class Entorno {
     public boolean movimientoPosible(int filaMovimiento, int columnaMovimiento) {
         boolean posible = false;
         
-        if (0 > filaMovimiento || filaMovimiento >= mapa.filas)
+        if (0 > filaMovimiento || filaMovimiento >= mapa.getFilas())
             posible = false;
-        else if (0 > columnaMovimiento || columnaMovimiento >= mapa.columnas)
+        else if (0 > columnaMovimiento || columnaMovimiento >= mapa.getColumnas())
             posible = false;
-        else if (mapa.mapa[filaMovimiento][columnaMovimiento] == 0)
+        else if (mapa.getMapa()[filaMovimiento][columnaMovimiento] == 0)
             posible = true;
         
         return posible;    
@@ -67,16 +109,16 @@ public class Entorno {
         if (posible) {
             switch (direccion) {
                 case NORESTE:
-                    posible = (mapa.mapa[filAgente-1][colAgente] == 0 && mapa.mapa[filAgente][colAgente+1] == 0);
+                    posible = (mapa.getMapa()[filAgente-1][colAgente] == 0 && mapa.getMapa()[filAgente][colAgente+1] == 0);
                     break;
                 case NOROESTE:
-                    posible = (mapa.mapa[filAgente-1][colAgente] == 0 && mapa.mapa[filAgente][colAgente-1] == 0);
+                    posible = (mapa.getMapa()[filAgente-1][colAgente] == 0 && mapa.getMapa()[filAgente][colAgente-1] == 0);
                     break;
                 case SURESTE:
-                    posible = (mapa.mapa[filAgente+1][colAgente] == 0 && mapa.mapa[filAgente][colAgente+1] == 0);
+                    posible = (mapa.getMapa()[filAgente+1][colAgente] == 0 && mapa.getMapa()[filAgente][colAgente+1] == 0);
                     break;
                 case SUROESTE:
-                    posible = (mapa.mapa[filAgente+1][colAgente] == 0 && mapa.mapa[filAgente][colAgente-1] == 0);
+                    posible = (mapa.getMapa()[filAgente+1][colAgente] == 0 && mapa.getMapa()[filAgente][colAgente-1] == 0);
                     break;
             }
         }
