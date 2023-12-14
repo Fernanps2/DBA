@@ -28,7 +28,11 @@ public class DBA_P3 {
         //Ejecutamos
         String host = "localhost";
         String containerName = "container-3";
-        String agentName = "ignaciotd";
+        
+        //Nombres agentes
+        String agentName1 = "McLovin";
+        String agentName2 = "SantaClaus";
+        String agentName3 = "Rudolph";
         
         try {
         jade.core.Runtime rt = jade.core.Runtime.instance();
@@ -41,11 +45,19 @@ public class DBA_P3 {
         
         ContainerController cc = rt.createAgentContainer(p);
         
-        //Creamos un nuevo agente y ejecutamos
-        AgentController ac = cc.createNewAgent(agentName,
+        //Creamos los agentes nuevos y ejecutamos
+        AgentController ac1 = cc.createNewAgent(agentName1,
                 AgenteP3.class.getCanonicalName(), null);
         
-        ac.start();        
+        AgentController ac2 = cc.createNewAgent(agentName2,
+                Santa.class.getCanonicalName(), null);
+        
+        AgentController ac3 = cc.createNewAgent(agentName3,
+                Rudolph.class.getCanonicalName(), null);
+        
+        ac1.start();
+        ac2.start();
+        ac3.start();
         
         } catch (StaleProxyException e) {
             e.printStackTrace();
