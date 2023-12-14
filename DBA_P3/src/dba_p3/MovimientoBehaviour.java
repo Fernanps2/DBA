@@ -38,6 +38,7 @@ public class MovimientoBehaviour extends Behaviour {
                 agente.setEnviarMensajeRudolph(true);
                 agente.setEnviarMensajeSanta(true);
                 agente.setHayObjetivo(false);
+                agente.reiniciaCaminoRecorrido();
             }
         }
     }

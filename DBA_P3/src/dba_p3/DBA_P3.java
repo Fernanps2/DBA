@@ -31,7 +31,7 @@ public class DBA_P3 {
         
         //Nombres agentes
         String agentName1 = "McLovin";
-        String agentName2 = "SantaClaus";
+        String agentName2 = "Santa";
         String agentName3 = "Rudolph";
         
         try {

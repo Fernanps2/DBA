@@ -56,27 +56,33 @@ public class enviarMensajeASanta extends Behaviour {
                 }
                 //Mandamos un mensaje a Santa de que hemos encontrado un reno
                 case 2 -> {
-                    ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                    msg.addReceiver(new AID("Santa", AID.ISLOCALNAME));
-                    msg.setConversationId(CONVERSATION_ID);
+                    
                     //Si hemos encontrado un reno y todavía no están todos
                     if (!((AgenteP3)myAgent).getRenosEncontrados()) {
+                        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+                        msg.addReceiver(new AID("Santa", AID.ISLOCALNAME));
+                        msg.setConversationId(CONVERSATION_ID);
                         msg.setContent("Se ha encontrado un nuevo reno");
                         //Desactivamos el flag de la conversación
                         ((AgenteP3)myAgent).setEnviarMensajeSanta(false);
+                        myAgent.send(msg);
                     }
                     else {
-                        msg.setContent("Se han encontrado todos los renos");
+                        System.out.println("He encontrado todos los renos, espero coordenadas de Santa");
+                        ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
+                        msg.addReceiver(new AID("Santa", AID.ISLOCALNAME));
+                        msg.setConversationId(CONVERSATION_ID);
+                        msg.setContent("Se han econtrado todos los renos, ¿dónde estás?");
+                        //Desactivamos el flag de la conversación
+                        myAgent.send(msg);
                         this.step = 3;
-                    }
-                    
-                    myAgent.send(msg);
+                    }      
                 }
                 //Esperamos a que Santa nos envíe sus coordenadas
                 case 3 -> {
                     ACLMessage msg = myAgent.blockingReceive();
                     if (msg.getConversationId().equals(CONVERSATION_ID)) {
-                        if (msg.getPerformative() == ACLMessage.REQUEST) {
+                        if (msg.getPerformative() == ACLMessage.AGREE) {
                             System.out.println("Santa me ha dicho: " + msg.getContent());
                             
                             //conseguimos las coordenadas, el mensaje esperado es del tipo:
@@ -95,6 +101,9 @@ public class enviarMensajeASanta extends Behaviour {
                             
                             this.step = 4;
                         }
+                    } else {
+                        System.out.println("ERROR - Error en la conversación con Santa");
+                        myAgent.doDelete();
                     }
                 }
                 //Enviamos a Santa que hemos llegado a su posición

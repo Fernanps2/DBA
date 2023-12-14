@@ -106,6 +106,7 @@ public class enviarMensajeARudolph extends Behaviour {
                             //Activamos el flag de que hemos encontrado a todos los renos
                             ((AgenteP3)myAgent).setRenosEncontrados(true);
                             ((AgenteP3)myAgent).setEnviarMensajeRudolph(false);
+                            ((AgenteP3)myAgent).setEnviarMensajeSanta(true);
                         }
                     }
                     else {

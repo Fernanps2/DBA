@@ -1,1 +1,1 @@
-http://LAPTOP-RTHMIPKO:7778/acc
+http://172.17.41.80:7778/acc

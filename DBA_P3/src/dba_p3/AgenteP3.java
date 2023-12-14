@@ -27,7 +27,7 @@ public class AgenteP3 extends Agent{
     protected void setup() {
         // Inicializamos el agente
         mapa = new Mapa();
-        String ruta = "./Pr1-maps/mapWithComplexObstacle1.txt";
+        String ruta = "./Pr1-maps/mapaP3.txt";
         
         caminoRecorrido = new ArrayList<ArrayList<Integer>>();
         
@@ -104,6 +104,8 @@ public class AgenteP3 extends Agent{
         return entorno;
     }
     
-    
+    public void reiniciaCaminoRecorrido() {
+        caminoRecorrido.clear();
+    }
 }
 

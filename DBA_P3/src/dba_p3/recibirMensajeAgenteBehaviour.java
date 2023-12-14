@@ -51,7 +51,7 @@ public class recibirMensajeAgenteBehaviour extends Behaviour {
                     }
                     
                 } else {
-                    System.out.println("Error in the coversation protocol - step" + 1);
+                    System.out.println("Error in the coversation protocol - step" + 0);
                     myAgent.doDelete();
                 }
             }
@@ -61,16 +61,51 @@ public class recibirMensajeAgenteBehaviour extends Behaviour {
                 if (msg.getPerformative() == ACLMessage.INFORM) {
                     System.out.println("Mensaje de Agente: " + msg.getContent());
                     santa.sumaContadorRenos();
+                    System.out.println("Contador: " + santa.getContador());
                     //Si ha encontrado todos los renos le respondemos con mis coordenadas
-                    if (santa.getContador() == 8) {
-                        ACLMessage replay = msg.createReply(ACLMessage.INFORM);
+                    if (santa.getContador() >= 7) {
+                        /*ACLMessage replay = msg.createReply(ACLMessage.INFORM);
                         String contenido = santa.getFila() + "," + santa.getColumna() + " Perfecto! Traeme los renos";
                         replay.setContent(contenido);
-                        this.myAgent.send(replay);
-                        this.finish = true;
+                        this.myAgent.send(replay);*/
+                        this.step = 2;
                     }
                 } else {
+                    System.out.println("Error in the coversation protocol - step" + 1);
+                    myAgent.doDelete();
+                }
+            }
+            case 2 -> { 
+                ACLMessage msg = myAgent.blockingReceive();
+                System.out.println(msg);
+                if (msg.getPerformative() == ACLMessage.REQUEST) {
+                    System.out.println("Mensaje de Agente: " + msg.getContent());
+                    //Si ha encontrado todos los renos le respondemos con mis coordenadas
+                    ACLMessage replay = msg.createReply(ACLMessage.AGREE);
+                    //String contenido =  "HOHOHOHO FELIZ NAVIDAD!!";
+                    String contenido = santa.getFila() + "," + santa.getColumna() + " Perfecto! Traeme los renos";
+                    replay.setContent(contenido);
+                    this.myAgent.send(replay);
+                    this.step = 3;
+                } else {
                     System.out.println("Error in the coversation protocol - step" + 2);
+                    myAgent.doDelete();
+                }
+            }
+            case 3 -> { 
+                ACLMessage msg = myAgent.blockingReceive();
+                System.out.println(msg);
+                if (msg.getPerformative() == ACLMessage.INFORM) {
+                    System.out.println("Mensaje de Agente: " + msg.getContent());
+                    //Si ha encontrado todos los renos le respondemos con mis coordenadas
+                    ACLMessage replay = msg.createReply(ACLMessage.INFORM);
+                    String contenido =  "HOHOHOHO FELIZ NAVIDAD!!";
+                    replay.setContent(contenido);
+                    this.myAgent.send(replay);
+                    this.finish = true;
+                    myAgent.doDelete();
+                } else {
+                    System.out.println("Error in the coversation protocol - step" + 3);
                     myAgent.doDelete();
                 }
             }
