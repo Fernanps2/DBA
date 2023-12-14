@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 
 public class Rudolph extends Agent{
-    //private const String contrasenia = "FuckNavidad";
     ArrayList<int[]> listaRenos = new ArrayList<>();
 
     
