@@ -41,38 +41,37 @@ public class MejorMovimientoBehaviour extends Behaviour{
     
     @Override
     public void action() {
-        mejorDistancia = 99999999;
-       //Comprobamos que movimiento es mejor
-       
-       for (int i = 0; i < movimientos.size(); i++) {
-           double distancia = movimientos.get(i).calculaMovimiento();
-           if (distancia != -1) {
-               if (distancia < mejorDistancia) {
-                   mejorDistancia = distancia;
-                   filaMovimiento = movimientos.get(i).getFila();
-                   colMovimiento = movimientos.get(i).getColumna();
+       if(miAgente.getHayObjetivo()) {
+            mejorDistancia = 99999999;
+           //Comprobamos que movimiento es mejor
+
+           for (int i = 0; i < movimientos.size(); i++) {
+               double distancia = movimientos.get(i).calculaMovimiento();
+               if (distancia != -1) {
+                   if (distancia < mejorDistancia) {
+                       mejorDistancia = distancia;
+                       filaMovimiento = movimientos.get(i).getFila();
+                       colMovimiento = movimientos.get(i).getColumna();
+                   }
                }
            }
+
+           try {
+               Thread.sleep(500);
+           } catch (InterruptedException e) {
+               System.out.print(e);
+           }
+
+           ArrayList<Integer> posicion = new ArrayList<Integer>();
+           posicion.add(filaMovimiento);
+           posicion.add(colMovimiento);
+
+           miAgente.getCaminoRecorrido().add(posicion);  
        }
-       
-       try {
-           Thread.sleep(500);
-       } catch (InterruptedException e) {
-           System.out.print(e);
-       }
-       
-       ArrayList<Integer> posicion = new ArrayList<Integer>();
-       posicion.add(filaMovimiento);
-       posicion.add(colMovimiento);
-       
-       miAgente.getCaminoRecorrido().add(posicion);       
     }
     
     @Override
     public boolean done() {
-        if (entorno.getFilaAgente() == entorno.getFilaMeta() && entorno.getColumnaAgente() == entorno.getColumnaMeta())
-            return true;
-        else
-            return false;
+        return false;
     }
 }
