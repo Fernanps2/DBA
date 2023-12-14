@@ -49,4 +49,6 @@ public class AgenteP3 extends Agent{
     public ArrayList<ArrayList<Integer>> getCaminoRecorrido(){
         return caminoRecorrido;
     }
+    
+    
 }
