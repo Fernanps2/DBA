@@ -118,7 +118,7 @@ public class MensajeRudolph extends Behaviour {
             
             if(msg.getPerformative() == ACLMessage.REQUEST){
                 /* debe comprobar la posicion del agente con la posicion del reno
-                    if(listaRenos.get(1).get(0) == )
+                    if(listaRenos.get(1).get(0) == getPosicionx() && listaRenos.get(1).get(1) == getPosiciony())
                 */
                 ACLMessage replay = msg.createReply(ACLMessage.AGREE);
                   
