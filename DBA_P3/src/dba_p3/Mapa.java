@@ -17,13 +17,25 @@ import java.io.IOException;
 
 public class Mapa {
     
-    int filas;
-    int columnas;
-    int[][] mapa;
+    private int filas;
+    private int columnas;
+    private int[][] mapa;
     
     public Mapa(){
         filas = 0;
         columnas = 0;
+    }
+    
+    public int getFilas(){
+        return filas;
+    }
+    
+    public int getColumnas(){
+        return columnas;
+    }
+    
+    public int[][] getMapa(){
+        return mapa;
     }
     
     public void leermapa(String ruta){

@@ -54,9 +54,8 @@ public class MensajeRudolph extends Behaviour {
             System.out.println(msg);
             
             if(msg.getPerformative() == ACLMessage.REQUEST){
-                /* debe comprobar la posicion del agente con la posicion del reno
-                    if(listaRenos.get(0).get(0) == )
-                */
+                // debe comprobar la posicion del agente con la posicion del reno
+                
                 ACLMessage replay = msg.createReply(ACLMessage.AGREE);
                   
                 int[] valores = listaRenos.get(1);
@@ -190,13 +189,30 @@ public class MensajeRudolph extends Behaviour {
                   
                 replay.setContent(contenidoMensaje);
                 this.myAgent.send(replay);
-                this.finish = true;
+                this.step = 8;
             }else{
                 System.out.println("Error en el protocolo - step" + 7);
             }
         }
+        case 8 -> {
+            ACLMessage msg = myAgent.blockingReceive();
+            System.out.println(msg);
+            
+            if(msg.getPerformative() == ACLMessage.REQUEST){
+                /* debe comprobar la posicion del agente con la posicion del reno
+                    if(listaRenos.get(1).get(0) == )
+                */
+                ACLMessage replay = msg.createReply(ACLMessage.REFUSE);
+                String contenidoMensaje = "Has econtrado a todos los renos";
+                  
+                replay.setContent(contenidoMensaje);
+                this.myAgent.send(replay);
+                this.finish = true;
+            }else{
+                System.out.println("Error en el protocolo - step" + 8);
+            }
         
-          
+        }
       }
     }
     

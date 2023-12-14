@@ -14,9 +14,9 @@ import java.util.ArrayList;
  * @author ignaciotd
  */
 public class AgenteP3 extends Agent{
-     Mapa mapa;
-    Entorno entorno;
-    public ArrayList<ArrayList<Integer>> caminoRecorrido;
+    private Mapa mapa;
+    private Entorno entorno;
+    private ArrayList<ArrayList<Integer>> caminoRecorrido;
    
     
     protected void setup() {
@@ -44,5 +44,9 @@ public class AgenteP3 extends Agent{
     
     public void takeDown() {
         System.out.println("El agente ha resuelto el mapa en " + caminoRecorrido.size() + " pasos");
+    }
+    
+    public ArrayList<ArrayList<Integer>> getCaminoRecorrido(){
+        return caminoRecorrido;
     }
 }

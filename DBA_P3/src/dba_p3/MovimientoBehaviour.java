@@ -12,10 +12,10 @@ import jade.core.behaviours.Behaviour;
  */
 public class MovimientoBehaviour extends Behaviour {
     
-    Entorno entorno;
-    int filaMovimiento;
-    int colMovimiento;
-    AgenteP3 agente;
+    private Entorno entorno;
+    private int filaMovimiento;
+    private int colMovimiento;
+    private AgenteP3 agente;
     
     public MovimientoBehaviour(Entorno entornoAgente, AgenteP3 agente) {
         entorno = entornoAgente;
@@ -23,19 +23,18 @@ public class MovimientoBehaviour extends Behaviour {
     }
     
     public void action() {
-        filaMovimiento = (!agente.caminoRecorrido.isEmpty()) ? agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1).get(0) : -1;
-        colMovimiento = (!agente.caminoRecorrido.isEmpty()) ? agente.caminoRecorrido.get(agente.caminoRecorrido.size()-1).get(1) : -1;
+        filaMovimiento = (!agente.getCaminoRecorrido().isEmpty()) ? agente.getCaminoRecorrido().get(agente.getCaminoRecorrido().size()-1).get(0) : -1;
+        colMovimiento = (!agente.getCaminoRecorrido().isEmpty()) ? agente.getCaminoRecorrido().get(agente.getCaminoRecorrido().size()-1).get(1) : -1;
         
         if (entorno.movimientoPosible(filaMovimiento,colMovimiento)) {
-        entorno.filAgente = filaMovimiento;
-        entorno.colAgente = colMovimiento;
+            entorno.modificarPosAgente(filaMovimiento, colMovimiento);
         }
         
         entorno.mostrarEnTorno();      
     }
     
     public boolean done() {
-        if (entorno.filAgente == entorno.filMeta && entorno.colAgente == entorno.colMeta) {
+        if (entorno.getFilaAgente() == entorno.getFilaMeta() && entorno.getColumnaAgente() == entorno.getColumnaMeta()) {
             agente.doDelete();
             return true;
         }

@@ -22,19 +22,19 @@ public class MovimientoSur implements Movimiento{
     public double calculaMovimiento(){
         double distanciaSur = -1;
         
-        if (entorno.movimientoPosible(entorno.filAgente+1,entorno.colAgente)) 
-            distanciaSur = CalcularDistancia(entorno, entorno.filAgente+1,entorno.colAgente, agente.caminoRecorrido);
+        if (entorno.movimientoPosible(entorno.getFilaAgente()+1,entorno.getColumnaAgente())) 
+            distanciaSur = CalcularDistancia(entorno, entorno.getFilaAgente()+1,entorno.getColumnaAgente(), agente.getCaminoRecorrido());
         
         return distanciaSur;
     }
     
     @Override
     public int getFila(){
-        return entorno.filAgente+1;
+        return entorno.getFilaAgente()+1;
     }
     
     @Override
     public int getColumna(){
-        return entorno.colAgente;
+        return entorno.getColumnaAgente();
     }
 }
