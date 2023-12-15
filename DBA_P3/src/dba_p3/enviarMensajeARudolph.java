@@ -17,6 +17,7 @@ public class enviarMensajeARudolph extends Behaviour {
     private int step = 0;
     private boolean finish = false;
     String CONVERSATION_ID = "ConversacionRudolph";
+    ACLMessage ultimoMsg;
     
     public void action() {
         if (((AgenteP3)myAgent).getEnviarMensajeRudolph()) {
@@ -52,6 +53,9 @@ public class enviarMensajeARudolph extends Behaviour {
                             ((AgenteP3)myAgent).setEnviarMensajeRudolph(false);
                             ((AgenteP3)myAgent).setHayObjetivo(true);
                             
+                            //Almacenamos el último mensaje
+                            ultimoMsg = msg;
+                            
                             this.step = 2;
                         }
                         else {
@@ -67,9 +71,7 @@ public class enviarMensajeARudolph extends Behaviour {
                 }
                 //Pedimos el siguiente reno e informamos de que hemos encontrado uno
                 case 2 -> {
-                    ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
-                    msg.addReceiver(new AID("Rudolph", AID.ISLOCALNAME));
-                    msg.setConversationId(CONVERSATION_ID);
+                    ACLMessage msg = ultimoMsg.createReply(ACLMessage.REQUEST);
                     msg.setContent("He encontrado a un nuevo reno. ¿Dónde está el siguiente?");
                     myAgent.send(msg);
                     this.step = 3;
@@ -95,6 +97,9 @@ public class enviarMensajeARudolph extends Behaviour {
                             //Activamos el flag de que hay un objetivo y desactivamos el de Santa
                             ((AgenteP3)myAgent).setEnviarMensajeRudolph(false);
                             ((AgenteP3)myAgent).setHayObjetivo(true);
+                            
+                            //Almacenamos el último mensaje
+                            ultimoMsg = msg;
                             
                             this.step = 2;
                         }

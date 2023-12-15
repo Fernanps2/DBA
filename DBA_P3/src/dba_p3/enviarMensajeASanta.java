@@ -17,6 +17,7 @@ public class enviarMensajeASanta extends Behaviour {
     private int step = 0;
     private boolean finish = false;
     String CONVERSATION_ID = "mensajeSanta";
+    ACLMessage ultimoMsg;
     
     @Override
     public void action() {
@@ -43,6 +44,9 @@ public class enviarMensajeASanta extends Behaviour {
                             this.step = 2;
                             ((AgenteP3)myAgent).setEnviarMensajeSanta(false);
                             ((AgenteP3)myAgent).setEnviarMensajeRudolph(true);
+                            
+//Almacenamos el mensaje para responder más adelante
+                            ultimoMsg = msg;
                         }
                         else {
                             System.out.println("Santa no me dió el privilegio :(");
@@ -59,9 +63,7 @@ public class enviarMensajeASanta extends Behaviour {
                     
                     //Si hemos encontrado un reno y todavía no están todos
                     if (!((AgenteP3)myAgent).getRenosEncontrados()) {
-                        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                        msg.addReceiver(new AID("Santa", AID.ISLOCALNAME));
-                        msg.setConversationId(CONVERSATION_ID);
+                        ACLMessage msg = ultimoMsg.createReply(ACLMessage.INFORM);
                         msg.setContent("Se ha encontrado un nuevo reno");
                         //Desactivamos el flag de la conversación
                         ((AgenteP3)myAgent).setEnviarMensajeSanta(false);
@@ -69,9 +71,7 @@ public class enviarMensajeASanta extends Behaviour {
                     }
                     else {
                         System.out.println("He encontrado todos los renos, espero coordenadas de Santa");
-                        ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
-                        msg.addReceiver(new AID("Santa", AID.ISLOCALNAME));
-                        msg.setConversationId(CONVERSATION_ID);
+                        ACLMessage msg = ultimoMsg.createReply(ACLMessage.REQUEST);
                         msg.setContent("Se han econtrado todos los renos, ¿dónde estás?");
                         //Desactivamos el flag de la conversación
                         myAgent.send(msg);
@@ -99,6 +99,9 @@ public class enviarMensajeASanta extends Behaviour {
                             ((AgenteP3)myAgent).setEnviarMensajeSanta(false);
                             ((AgenteP3)myAgent).setHayObjetivo(true);
                             
+                            //Almacenamos el último mensaje
+                            ultimoMsg = msg;
+                            
                             this.step = 4;
                         }
                     } else {
@@ -108,9 +111,7 @@ public class enviarMensajeASanta extends Behaviour {
                 }
                 //Enviamos a Santa que hemos llegado a su posición
                 case 4 -> {
-                    ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                    msg.addReceiver(new AID("Santa", AID.ISLOCALNAME));
-                    msg.setConversationId(CONVERSATION_ID);
+                    ACLMessage msg = ultimoMsg.createReply(ACLMessage.INFORM);
                     msg.setContent("He llegado");
                     myAgent.send(msg);
                     this.step = 5;
