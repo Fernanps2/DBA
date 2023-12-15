@@ -56,6 +56,10 @@ public class Santa extends Agent {
   
     @Override
     public void takeDown() {
-        System.out.println("Santa: Gracias a ti vivira la magia de la navidad HOHOHOHO");
+        if(contadorRenos > 0){
+            System.out.println("Santa: Gracias a ti vivira la magia de la navidad HOHOHOHO");
+        }else{
+            System.out.println("Santa: Por culpa tuya no hay navidah");
+        }
     }
 }
