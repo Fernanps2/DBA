@@ -22,7 +22,7 @@ public class MejorMovimientoBehaviour extends Behaviour{
     private int filaMovimiento, colMovimiento;
     private AgenteP3 miAgente;
     
-    ArrayList<Movimiento> movimientos;
+    private ArrayList<Movimiento> movimientos;
     
     public MejorMovimientoBehaviour(Entorno entornoAgente, AgenteP3 agente) {
         entorno = entornoAgente;

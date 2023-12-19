@@ -17,8 +17,8 @@ public class MensajeRudolph extends Behaviour {
     private int step = 0;
     private boolean finish = false;
     private String contrasenia = "EsUnNIñoBueno:)";
-    ArrayList<int[]> listaRenos = new ArrayList<>();
-    int contadorRenos= 0;
+    private ArrayList<int[]> listaRenos = new ArrayList<>();
+    private int contadorRenos= 0;
     
     
     public MensajeRudolph(ArrayList<int[]> Renos) {

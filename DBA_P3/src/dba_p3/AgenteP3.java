@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author ignaciotd
  */
 public class AgenteP3 extends Agent{
-     Mapa mapa;
+    private Mapa mapa;
     private Entorno entorno;
     private String codigo;
     private boolean enviarMensajeSanta;

@@ -16,8 +16,8 @@ public class enviarMensajeASanta extends Behaviour {
     
     private int step = 0;
     private boolean finish = false;
-    String CONVERSATION_ID = "mensajeSanta";
-    ACLMessage ultimoMsg;
+    private String CONVERSATION_ID = "mensajeSanta";
+    private ACLMessage ultimoMsg;
     
     @Override
     public void action() {

@@ -16,8 +16,8 @@ public class enviarMensajeARudolph extends Behaviour {
     
     private int step = 0;
     private boolean finish = false;
-    String CONVERSATION_ID = "ConversacionRudolph";
-    ACLMessage ultimoMsg;
+    private String CONVERSATION_ID = "ConversacionRudolph";
+    private ACLMessage ultimoMsg;
     
     public void action() {
         if (((AgenteP3)myAgent).getEnviarMensajeRudolph()) {

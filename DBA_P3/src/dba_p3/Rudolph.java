@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 
 public class Rudolph extends Agent{
-    ArrayList<int[]> listaRenos = new ArrayList<>();
+    private ArrayList<int[]> listaRenos = new ArrayList<>();
 
     
     @Override
