@@ -34,7 +34,7 @@ public class enviarMensajeARudolph extends Behaviour {
                 //Esperamos a que nos acepte Rudolph
                 case 1 -> {
                     ACLMessage msg = myAgent.blockingReceive();
-                    
+                    System.out.println(msg);
                     if (msg.getConversationId().equals(CONVERSATION_ID)) {
                         if (msg.getPerformative() == ACLMessage.AGREE) {
                             System.out.println("Rudolph me ha dicho: " + msg.getContent());
@@ -79,7 +79,7 @@ public class enviarMensajeARudolph extends Behaviour {
                 //Esperamos la respuesta de Rudolph para un nuevo reno
                 case 3 -> {
                     ACLMessage msg = myAgent.blockingReceive();
-                    
+                    System.out.println(msg);
                     if (msg.getConversationId().equals(CONVERSATION_ID)) {
                         if (msg.getPerformative() == ACLMessage.AGREE) {
                             System.out.println("Rudolph me ha dicho: " + msg.getContent());

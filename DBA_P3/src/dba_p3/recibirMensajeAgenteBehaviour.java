@@ -63,11 +63,7 @@ public class recibirMensajeAgenteBehaviour extends Behaviour {
                     santa.sumaContadorRenos();
                     System.out.println("Contador: " + santa.getContador());
                     //Si ha encontrado todos los renos le respondemos con mis coordenadas
-                    if (santa.getContador() >= 7) {
-                        /*ACLMessage replay = msg.createReply(ACLMessage.INFORM);
-                        String contenido = santa.getFila() + "," + santa.getColumna() + " Perfecto! Traeme los renos";
-                        replay.setContent(contenido);
-                        this.myAgent.send(replay);*/
+                    if (santa.getContador() == 8) {
                         this.step = 2;
                     }
                 } else {

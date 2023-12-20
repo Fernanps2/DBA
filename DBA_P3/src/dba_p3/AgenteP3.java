@@ -22,7 +22,6 @@ public class AgenteP3 extends Agent{
     private boolean hayObjetivo;
     private boolean renosEncontrados;
     private ArrayList<ArrayList<Integer>> caminoRecorrido;
-   
     
     protected void setup() {
         // Inicializamos el agente
@@ -57,7 +56,7 @@ public class AgenteP3 extends Agent{
     }
     
     public void takeDown() {
-        System.out.println("El agente ha resuelto el mapa en " + caminoRecorrido.size() + " pasos");
+        System.out.println("Agente terminado");
     }
     
     public String getCodigo() {

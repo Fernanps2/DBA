@@ -37,6 +37,7 @@ public class enviarMensajeASanta extends Behaviour {
                 //Comprobamos si nos han aceptado o rechazado
                 case 1 -> {
                     ACLMessage msg = myAgent.blockingReceive();
+                    System.out.println(msg);
                     if (msg.getConversationId().equals(CONVERSATION_ID)) {
                         if (msg.getPerformative() == ACLMessage.ACCEPT_PROPOSAL) {
                             System.out.println("Santa ha aceptado la propuesta. La contraseña es: " + msg.getContent());
@@ -81,6 +82,7 @@ public class enviarMensajeASanta extends Behaviour {
                 //Esperamos a que Santa nos envíe sus coordenadas
                 case 3 -> {
                     ACLMessage msg = myAgent.blockingReceive();
+                    System.out.println(msg);
                     if (msg.getConversationId().equals(CONVERSATION_ID)) {
                         if (msg.getPerformative() == ACLMessage.AGREE) {
                             System.out.println("Santa me ha dicho: " + msg.getContent());
@@ -119,7 +121,7 @@ public class enviarMensajeASanta extends Behaviour {
                 //Esperamos a que Santa nos envíe el mensaje final
                 case 5 -> {
                     ACLMessage msg = myAgent.blockingReceive();
-                    
+                    System.out.println(msg);
                     if(msg.getConversationId().equals(CONVERSATION_ID) &&
                             msg.getPerformative() == ACLMessage.INFORM) {
                         System.out.println("Santa me ha dicho: " + msg.getContent());

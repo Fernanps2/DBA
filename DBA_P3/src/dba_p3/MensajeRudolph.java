@@ -67,7 +67,7 @@ public class MensajeRudolph extends Behaviour {
                 this.myAgent.send(replay);
                 contadorRenos++;
                 
-                if(contadorRenos == 7){
+                if(contadorRenos == 8){
                         this.step = 2;
                 }
             }else{
